@@ -1,0 +1,55 @@
+{
+  "name": "geo-topai",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "dev": "node --import tsx/esm server.ts",
+    "start": "node --import tsx/esm server.ts",
+    "start:legacy": "tsx server.ts",
+    "start:prod": "NODE_ENV=production node --import tsx/esm server.ts",
+    "build": "vite build",
+    "preview": "vite preview",
+    "clean": "rm -rf dist",
+    "lint": "tsc --noEmit",
+    "geo:payload": "node --import tsx/esm scripts/build-geo-space-payload.ts",
+    "geo:publish": "node scripts/publish-geo-space-draft.mjs",
+    "geo:test": "node scripts/publish-geo-space-draft.mjs --payload-dir geo_space_payload/data_to_publish --offline 1 --max-per-kind 40 --batch-size 20",
+    "geo:test:net": "node scripts/publish-geo-space-draft.mjs --payload-dir geo_space_payload/data_to_publish --network TESTNET --max-per-kind 40 --batch-size 20",
+    "geo:test:ipfs": "node scripts/publish-geo-space-draft.mjs --payload-dir geo_space_payload/data_to_publish --network TESTNET --skip-rpc-check 1 --max-per-kind 40 --batch-size 20"
+  },
+  "dependencies": {
+    "@geoprotocol/geo-sdk": "^0.12.0",
+    "@google/genai": "^1.29.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@types/d3": "^7.4.3",
+    "@vitejs/plugin-react": "^5.0.4",
+    "better-sqlite3": "^12.4.1",
+    "clsx": "^2.1.1",
+    "d3": "^7.9.0",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.34.3",
+    "ox": "^0.14.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "recharts": "^3.7.0",
+    "tailwind-merge": "^3.5.0",
+    "viem": "^2.46.3",
+    "vite": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.14.0",
+    "autoprefixer": "^10.4.21",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}

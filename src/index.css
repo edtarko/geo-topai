@@ -1,0 +1,465 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  --geo-accent-1: #fd77e7;
+  --geo-accent-2: #cb5ef2;
+  --geo-accent-3: #9c46fd;
+  --geo-ink: #1e1e1e;
+  --geo-cream: #f9f8fd;
+  --geo-bg: #f9f8fd;
+  --geo-surface: rgba(255, 255, 255, 0.78);
+  --geo-text: #1e1e1e;
+  --geo-muted: #5d5970;
+  --geo-border: rgba(126, 96, 182, 0.22);
+}
+
+.dark {
+  --geo-bg: #090611;
+  --geo-surface: rgba(21, 15, 35, 0.82);
+  --geo-text: #f9f8fd;
+  --geo-muted: #c3b7e6;
+  --geo-border: rgba(179, 121, 244, 0.22);
+}
+
+@layer base {
+  body {
+    @apply antialiased;
+    background: var(--geo-bg);
+    color: var(--geo-text);
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection {
+    background: rgba(156, 70, 253, 0.25);
+    color: #110c1c;
+  }
+
+  .dark ::selection {
+    background: rgba(253, 119, 231, 0.34);
+    color: #ffffff;
+  }
+}
+
+.geo-brand-gradient {
+  background: linear-gradient(132deg, var(--geo-accent-1) 0%, var(--geo-accent-2) 52%, var(--geo-accent-3) 100%);
+}
+
+.geo-brand-text {
+  background: linear-gradient(132deg, var(--geo-accent-1) 0%, var(--geo-accent-2) 52%, var(--geo-accent-3) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.geo-pill-soft {
+  border: 1px solid var(--geo-border);
+  background: linear-gradient(180deg, rgba(253, 119, 231, 0.14) 0%, rgba(156, 70, 253, 0.08) 100%);
+}
+
+.geo-primary-btn {
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(132deg, var(--geo-accent-1) 0%, var(--geo-accent-2) 52%, var(--geo-accent-3) 100%);
+  box-shadow: 0 14px 26px -18px rgba(120, 46, 178, 0.65);
+}
+
+.geo-primary-btn:hover {
+  filter: saturate(1.06) brightness(1.02);
+}
+
+.geo-secondary-btn {
+  color: var(--geo-text);
+  border: 1px solid var(--geo-border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.68) 0%, rgba(253, 246, 255, 0.56) 100%);
+}
+
+.dark .geo-secondary-btn {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.04) 100%);
+}
+
+.geo-surface {
+  background: var(--geo-surface);
+  border-color: var(--geo-border);
+}
+
+.geo-focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(156, 70, 253, 0.16);
+}
+
+.geo-link {
+  color: #9c46fd;
+}
+
+.geo-link:hover {
+  color: #cb5ef2;
+}
+
+.dark .geo-link {
+  color: #d88df8;
+}
+
+.dark .geo-link:hover {
+  color: #fd77e7;
+}
+
+.glass {
+  @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)];
+}
+
+.neo-blur {
+  background:
+    radial-gradient(circle at 10% 8%, rgba(253, 119, 231, 0.22) 0%, rgba(253, 119, 231, 0.02) 32%, transparent 58%),
+    radial-gradient(circle at 92% 14%, rgba(203, 94, 242, 0.2) 0%, rgba(203, 94, 242, 0.03) 32%, transparent 58%),
+    radial-gradient(circle at 50% 114%, rgba(156, 70, 253, 0.12) 0%, rgba(156, 70, 253, 0.02) 34%, transparent 62%),
+    var(--geo-bg);
+  position: relative;
+}
+
+.dark .neo-blur {
+  background:
+    radial-gradient(circle at 8% 8%, rgba(253, 119, 231, 0.24) 0%, rgba(253, 119, 231, 0.03) 34%, transparent 60%),
+    radial-gradient(circle at 88% 12%, rgba(203, 94, 242, 0.24) 0%, rgba(203, 94, 242, 0.03) 34%, transparent 60%),
+    radial-gradient(circle at 50% 112%, rgba(156, 70, 253, 0.22) 0%, rgba(156, 70, 253, 0.03) 34%, transparent 60%),
+    #090611;
+}
+
+.neo-blur::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(75, 56, 102, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(75, 56, 102, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(circle at top, black 35%, transparent 85%);
+}
+
+.dark .neo-blur::before {
+  background-image: linear-gradient(rgba(245, 233, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 233, 255, 0.06) 1px, transparent 1px);
+}
+
+.markdown-body {
+  @apply text-sm leading-relaxed text-black/70;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+  @apply font-bold text-black mb-4 mt-8;
+}
+
+.markdown-body p {
+  @apply mb-4;
+}
+
+.markdown-body ul {
+  @apply list-disc pl-6 mb-4;
+}
+
+.ios-sheet {
+  box-shadow:
+    0 30px 80px -28px rgba(48, 24, 72, 0.58),
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 -1px 0 rgba(255, 255, 255, 0.03) inset;
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+}
+
+.ios-sheet-bg {
+  background:
+    radial-gradient(circle at 92% 12%, rgba(253, 119, 231, 0.2) 0%, rgba(253, 119, 231, 0.04) 34%, transparent 58%),
+    radial-gradient(circle at 10% 90%, rgba(156, 70, 253, 0.15) 0%, rgba(156, 70, 253, 0.03) 32%, transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(249, 248, 253, 0.88) 100%);
+}
+
+.dark .ios-sheet-bg {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(253, 119, 231, 0.24) 0%, rgba(253, 119, 231, 0.04) 34%, transparent 62%),
+    radial-gradient(circle at 12% 85%, rgba(156, 70, 253, 0.2) 0%, rgba(156, 70, 253, 0.03) 36%, transparent 62%),
+    linear-gradient(180deg, rgba(17, 11, 29, 0.95) 0%, rgba(11, 8, 19, 0.92) 100%);
+}
+
+.ios-frost {
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.72) 0%,
+    rgba(255, 255, 255, 0.52) 100%
+  );
+}
+
+.dark .ios-frost {
+  background: linear-gradient(
+    180deg,
+    rgba(18, 12, 31, 0.86) 0%,
+    rgba(18, 12, 31, 0.62) 100%
+  );
+}
+
+.ios-header-rim {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55) inset,
+    0 -1px 0 rgba(255, 255, 255, 0.4) inset;
+}
+
+.dark .ios-header-rim {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 -1px 0 rgba(255, 255, 255, 0.03) inset;
+}
+
+.ios-modal-handle {
+  width: 72px;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(203, 94, 242, 0.5), rgba(156, 70, 253, 0.55));
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset;
+}
+
+.dark .ios-modal-handle {
+  background: linear-gradient(90deg, rgba(253, 119, 231, 0.36), rgba(156, 70, 253, 0.4));
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset;
+}
+
+.ios-pill {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(250, 242, 255, 0.35) 100%);
+  box-shadow: 0 8px 24px -16px rgba(70, 24, 104, 0.3);
+}
+
+.dark .ios-pill {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+  box-shadow: 0 10px 24px -16px rgba(0, 0, 0, 0.55);
+}
+
+.ios-nav-pill {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.58) 0%, rgba(250, 242, 255, 0.4) 100%);
+  box-shadow: 0 12px 28px -20px rgba(70, 24, 104, 0.35);
+}
+
+.ios-nav-pill:hover {
+  transform: translateY(-1px);
+}
+
+.dark .ios-nav-pill {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.04) 100%);
+  box-shadow: 0 14px 30px -20px rgba(0, 0, 0, 0.6);
+}
+
+.ios-close-control {
+  border: 1px solid rgba(255, 255, 255, 0.52);
+  background: radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.42), rgba(246, 233, 254, 0.2) 55%, rgba(226, 206, 248, 0.12) 100%);
+  box-shadow:
+    0 10px 24px -14px rgba(70, 24, 104, 0.42),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+}
+
+.ios-close-control:hover {
+  transform: scale(1.04);
+}
+
+.dark .ios-close-control {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.07) 55%, rgba(255, 255, 255, 0.04) 100%);
+  box-shadow:
+    0 14px 26px -16px rgba(0, 0, 0, 0.7),
+    0 1px 0 rgba(255, 255, 255, 0.12) inset;
+}
+
+.ios-close-ghost {
+  color: rgba(20, 24, 34, 0.78);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.ios-close-ghost:hover {
+  background: rgba(255, 255, 255, 0.42);
+  box-shadow: 0 10px 18px -14px rgba(70, 24, 104, 0.35);
+}
+
+.ios-close-ghost:active {
+  transform: scale(0.96);
+}
+
+.dark .ios-close-ghost {
+  color: rgba(236, 241, 255, 0.82);
+}
+
+.dark .ios-close-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 20px -14px rgba(0, 0, 0, 0.65);
+}
+
+.ios-project-title {
+  color: #12141a;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.dark .ios-project-title {
+  color: #f7f9ff;
+  text-shadow: 0 2px 16px rgba(203, 94, 242, 0.3);
+}
+
+.ios-project-description {
+  color: rgba(18, 21, 28, 0.66);
+}
+
+.dark .ios-project-description {
+  color: rgba(241, 245, 255, 0.82);
+}
+
+.ios-repo-pill {
+  border-color: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 12px 24px -18px rgba(70, 24, 104, 0.45);
+}
+
+.dark .ios-repo-pill {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 14px 28px -18px rgba(0, 0, 0, 0.65);
+}
+
+.ios-action-stack {
+  border: 1px solid rgba(255, 255, 255, 0.46);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(251, 244, 255, 0.24) 100%);
+  box-shadow: 0 26px 45px -32px rgba(70, 24, 104, 0.35);
+  border-radius: 26px;
+  padding: 10px;
+}
+
+.dark .ios-action-stack {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  box-shadow: 0 30px 48px -30px rgba(0, 0, 0, 0.68);
+}
+
+.ios-action-btn {
+  color: #11131a;
+}
+
+.ios-action-btn:hover {
+  transform: translateY(-1px);
+}
+
+.ios-action-btn-primary {
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.ios-action-btn-secondary {
+  color: #8f49ee;
+}
+
+.ios-action-btn-success {
+  color: #ab3ef3;
+}
+
+.dark .ios-action-btn {
+  color: #eef3ff;
+}
+
+.dark .ios-action-btn-secondary {
+  color: #d496ff;
+}
+
+.dark .ios-action-btn-success {
+  color: #f3a0ff;
+}
+
+.ios-soft-card {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(252, 247, 255, 0.5) 100%);
+  box-shadow: 0 20px 32px -24px rgba(70, 24, 104, 0.35);
+}
+
+.dark .ios-soft-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(20, 14, 34, 0.9) 0%, rgba(20, 14, 34, 0.72) 100%);
+  box-shadow: 0 24px 42px -26px rgba(0, 0, 0, 0.7);
+}
+
+.ios-metric-tile {
+  box-shadow:
+    0 20px 34px -28px rgba(70, 24, 104, 0.55),
+    0 1px 0 rgba(255, 255, 255, 0.72) inset;
+}
+
+.dark .ios-metric-tile {
+  box-shadow:
+    0 26px 42px -28px rgba(0, 0, 0, 0.8),
+    0 1px 0 rgba(255, 255, 255, 0.08) inset;
+}
+
+.ios-section-title {
+  color: rgba(50, 34, 76, 0.56);
+}
+
+.dark .ios-section-title {
+  color: rgba(224, 210, 244, 0.62);
+}
+
+.ios-raise:hover {
+  transform: translateY(-1px);
+}
+
+.ios-health-card {
+  border-color: rgba(203, 94, 242, 0.26);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(203, 94, 242, 0.12) 0%, rgba(203, 94, 242, 0.02) 40%, transparent 75%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76) 0%, rgba(252, 247, 255, 0.56) 100%);
+}
+
+.dark .ios-health-card {
+  border-color: rgba(203, 94, 242, 0.3);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(203, 94, 242, 0.2) 0%, rgba(203, 94, 242, 0.03) 42%, transparent 80%),
+    linear-gradient(180deg, rgba(19, 13, 32, 0.92) 0%, rgba(18, 13, 30, 0.76) 100%);
+}
+
+.ios-health-track {
+  background: rgba(54, 36, 80, 0.12);
+}
+
+.dark .ios-health-track {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.ios-health-fill {
+  background: linear-gradient(90deg, #fd77e7 0%, #cb5ef2 60%, #9c46fd 100%);
+  box-shadow: 0 0 14px rgba(203, 94, 242, 0.45);
+}
+
+.ios-meta-item {
+  border-color: rgba(255, 255, 255, 0.58);
+}
+
+.dark .ios-meta-item {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.ios-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(172, 130, 220, 0.5) transparent;
+}
+
+.ios-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.ios-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(203, 94, 242, 0.54), rgba(156, 70, 253, 0.48));
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}

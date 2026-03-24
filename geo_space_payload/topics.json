@@ -1,0 +1,776 @@
+[
+  {
+    "id": "topic:computer-science",
+    "name": "Computer Science",
+    "slug": "computer-science",
+    "description": "Topic from Geo AI ecosystem: Computer Science",
+    "usage_count": 195,
+    "project_count": 1,
+    "people_count": 194
+  },
+  {
+    "id": "topic:artificial-intelligence",
+    "name": "Artificial Intelligence",
+    "slug": "artificial-intelligence",
+    "description": "Topic from Geo AI ecosystem: Artificial Intelligence",
+    "usage_count": 180,
+    "project_count": 2,
+    "people_count": 178
+  },
+  {
+    "id": "topic:machine-learning",
+    "name": "Machine Learning",
+    "slug": "machine-learning",
+    "description": "Topic from Geo AI ecosystem: Machine Learning",
+    "usage_count": 107,
+    "project_count": 8,
+    "people_count": 99
+  },
+  {
+    "id": "topic:natural-language-processing",
+    "name": "Natural Language Processing",
+    "slug": "natural-language-processing",
+    "description": "Topic from Geo AI ecosystem: Natural Language Processing",
+    "usage_count": 41,
+    "project_count": 2,
+    "people_count": 39
+  },
+  {
+    "id": "topic:computer-vision",
+    "name": "Computer Vision",
+    "slug": "computer-vision",
+    "description": "Topic from Geo AI ecosystem: Computer Vision",
+    "usage_count": 14,
+    "project_count": 1,
+    "people_count": 13
+  },
+  {
+    "id": "topic:robotics",
+    "name": "Robotics",
+    "slug": "robotics",
+    "description": "Topic from Geo AI ecosystem: Robotics",
+    "usage_count": 14,
+    "project_count": 1,
+    "people_count": 13
+  },
+  {
+    "id": "topic:artificial-neural-networks",
+    "name": "Artificial Neural Networks",
+    "slug": "artificial-neural-networks",
+    "description": "Topic from Geo AI ecosystem: Artificial Neural Networks",
+    "usage_count": 13,
+    "project_count": 0,
+    "people_count": 13
+  },
+  {
+    "id": "topic:reinforcement-learning",
+    "name": "Reinforcement Learning",
+    "slug": "reinforcement-learning",
+    "description": "Topic from Geo AI ecosystem: Reinforcement Learning",
+    "usage_count": 11,
+    "project_count": 1,
+    "people_count": 10
+  },
+  {
+    "id": "topic:deep-learning",
+    "name": "Deep Learning",
+    "slug": "deep-learning",
+    "description": "Topic from Geo AI ecosystem: Deep Learning",
+    "usage_count": 7,
+    "project_count": 5,
+    "people_count": 2
+  },
+  {
+    "id": "topic:ai",
+    "name": "AI",
+    "slug": "ai",
+    "description": "Topic from Geo AI ecosystem: AI",
+    "usage_count": 6,
+    "project_count": 2,
+    "people_count": 4
+  },
+  {
+    "id": "topic:python",
+    "name": "Python",
+    "slug": "python",
+    "description": "Topic from Geo AI ecosystem: Python",
+    "usage_count": 5,
+    "project_count": 5,
+    "people_count": 0
+  },
+  {
+    "id": "topic:theoretical-computer-science",
+    "name": "Theoretical Computer Science",
+    "slug": "theoretical-computer-science",
+    "description": "Topic from Geo AI ecosystem: Theoretical Computer Science",
+    "usage_count": 5,
+    "project_count": 0,
+    "people_count": 5
+  },
+  {
+    "id": "topic:pytorch",
+    "name": "Pytorch",
+    "slug": "pytorch",
+    "description": "Topic from Geo AI ecosystem: Pytorch",
+    "usage_count": 3,
+    "project_count": 3,
+    "people_count": 0
+  },
+  {
+    "id": "topic:chatgpt",
+    "name": "Chatgpt",
+    "slug": "chatgpt",
+    "description": "Topic from Geo AI ecosystem: Chatgpt",
+    "usage_count": 2,
+    "project_count": 2,
+    "people_count": 0
+  },
+  {
+    "id": "topic:gpt",
+    "name": "Gpt",
+    "slug": "gpt",
+    "description": "Topic from Geo AI ecosystem: Gpt",
+    "usage_count": 2,
+    "project_count": 2,
+    "people_count": 0
+  },
+  {
+    "id": "topic:hacktoberfest",
+    "name": "Hacktoberfest",
+    "slug": "hacktoberfest",
+    "description": "Topic from Geo AI ecosystem: Hacktoberfest",
+    "usage_count": 2,
+    "project_count": 2,
+    "people_count": 0
+  },
+  {
+    "id": "topic:llm",
+    "name": "LLM",
+    "slug": "llm",
+    "description": "Topic from Geo AI ecosystem: LLM",
+    "usage_count": 2,
+    "project_count": 2,
+    "people_count": 0
+  },
+  {
+    "id": "topic:neural-network",
+    "name": "Neural Network",
+    "slug": "neural-network",
+    "description": "Topic from Geo AI ecosystem: Neural Network",
+    "usage_count": 2,
+    "project_count": 2,
+    "people_count": 0
+  },
+  {
+    "id": "topic:numpy",
+    "name": "Numpy",
+    "slug": "numpy",
+    "description": "Topic from Geo AI ecosystem: Numpy",
+    "usage_count": 2,
+    "project_count": 2,
+    "people_count": 0
+  },
+  {
+    "id": "topic:transformer",
+    "name": "Transformer",
+    "slug": "transformer",
+    "description": "Topic from Geo AI ecosystem: Transformer",
+    "usage_count": 2,
+    "project_count": 2,
+    "people_count": 0
+  },
+  {
+    "id": "topic:alerting",
+    "name": "Alerting",
+    "slug": "alerting",
+    "description": "Topic from Geo AI ecosystem: Alerting",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:algorithmic-trading",
+    "name": "Algorithmic Trading",
+    "slug": "algorithmic-trading",
+    "description": "Topic from Geo AI ecosystem: Algorithmic Trading",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:algorithms",
+    "name": "Algorithms",
+    "slug": "algorithms",
+    "description": "Topic from Geo AI ecosystem: Algorithms",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:analyze",
+    "name": "Analyze",
+    "slug": "analyze",
+    "description": "Topic from Geo AI ecosystem: Analyze",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:article",
+    "name": "Article",
+    "slug": "article",
+    "description": "Topic from Geo AI ecosystem: Article",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:autograd",
+    "name": "Autograd",
+    "slug": "autograd",
+    "description": "Topic from Geo AI ecosystem: Autograd",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:awesome-list",
+    "name": "Awesome List",
+    "slug": "awesome-list",
+    "description": "Topic from Geo AI ecosystem: Awesome List",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:bioinformatics",
+    "name": "Bioinformatics",
+    "slug": "bioinformatics",
+    "description": "Topic from Geo AI ecosystem: Bioinformatics",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:bitcoin",
+    "name": "Bitcoin",
+    "slug": "bitcoin",
+    "description": "Topic from Geo AI ecosystem: Bitcoin",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:book",
+    "name": "Book",
+    "slug": "book",
+    "description": "Topic from Geo AI ecosystem: Book",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:chatgpt-prompts",
+    "name": "Chatgpt Prompts",
+    "slug": "chatgpt-prompts",
+    "description": "Topic from Geo AI ecosystem: Chatgpt Prompts",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:chinese",
+    "name": "Chinese",
+    "slug": "chinese",
+    "description": "Topic from Geo AI ecosystem: Chinese",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:claude",
+    "name": "Claude",
+    "slug": "claude",
+    "description": "Topic from Geo AI ecosystem: Claude",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:cncf",
+    "name": "Cncf",
+    "slug": "cncf",
+    "description": "Topic from Geo AI ecosystem: Cncf",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:computer-architecture",
+    "name": "Computer Architecture",
+    "slug": "computer-architecture",
+    "description": "Topic from Geo AI ecosystem: Computer Architecture",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:databases",
+    "name": "Databases",
+    "slug": "databases",
+    "description": "Topic from Geo AI ecosystem: Databases",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:deep-learning-tutorial",
+    "name": "Deep Learning Tutorial",
+    "slug": "deep-learning-tutorial",
+    "description": "Topic from Geo AI ecosystem: Deep Learning Tutorial",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:deep-neural-networks",
+    "name": "Deep Neural Networks",
+    "slug": "deep-neural-networks",
+    "description": "Topic from Geo AI ecosystem: Deep Neural Networks",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:devops",
+    "name": "Devops",
+    "slug": "devops",
+    "description": "Topic from Geo AI ecosystem: Devops",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:distributed",
+    "name": "Distributed",
+    "slug": "distributed",
+    "description": "Topic from Geo AI ecosystem: Distributed",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:docker",
+    "name": "Docker",
+    "slug": "docker",
+    "description": "Topic from Geo AI ecosystem: Docker",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:gan",
+    "name": "Gan",
+    "slug": "gan",
+    "description": "Topic from Geo AI ecosystem: Gan",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:gemini",
+    "name": "Gemini",
+    "slug": "gemini",
+    "description": "Topic from Geo AI ecosystem: Gemini",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:go",
+    "name": "Go",
+    "slug": "go",
+    "description": "Topic from Geo AI ecosystem: Go",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:golang",
+    "name": "Golang",
+    "slug": "golang",
+    "description": "Topic from Geo AI ecosystem: Golang",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:gpt-4",
+    "name": "Gpt 4",
+    "slug": "gpt-4",
+    "description": "Topic from Geo AI ecosystem: Gpt 4",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:gpu",
+    "name": "GPU",
+    "slug": "gpu",
+    "description": "Topic from Geo AI ecosystem: GPU",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:influxdb",
+    "name": "Influxdb",
+    "slug": "influxdb",
+    "description": "Topic from Geo AI ecosystem: Influxdb",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:ios",
+    "name": "Ios",
+    "slug": "ios",
+    "description": "Topic from Geo AI ecosystem: Ios",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:javascript",
+    "name": "Javascript",
+    "slug": "javascript",
+    "description": "Topic from Geo AI ecosystem: Javascript",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:kubernetes",
+    "name": "Kubernetes",
+    "slug": "kubernetes",
+    "description": "Topic from Geo AI ecosystem: Kubernetes",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:language-model",
+    "name": "Language Model",
+    "slug": "language-model",
+    "description": "Topic from Geo AI ecosystem: Language Model",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:large-language-models",
+    "name": "Large Language Models",
+    "slug": "large-language-models",
+    "description": "Topic from Geo AI ecosystem: Large Language Models",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:lstm",
+    "name": "Lstm",
+    "slug": "lstm",
+    "description": "Topic from Geo AI ecosystem: Lstm",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:matplotlib",
+    "name": "Matplotlib",
+    "slug": "matplotlib",
+    "description": "Topic from Geo AI ecosystem: Matplotlib",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:ml",
+    "name": "ML",
+    "slug": "ml",
+    "description": "Topic from Geo AI ecosystem: ML",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:model-hub",
+    "name": "Model Hub",
+    "slug": "model-hub",
+    "description": "Topic from Geo AI ecosystem: Model Hub",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:monitoring",
+    "name": "Monitoring",
+    "slug": "monitoring",
+    "description": "Topic from Geo AI ecosystem: Monitoring",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:netdata",
+    "name": "Netdata",
+    "slug": "netdata",
+    "description": "Topic from Geo AI ecosystem: Netdata",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:neural-networks",
+    "name": "Neural Networks",
+    "slug": "neural-networks",
+    "description": "Topic from Geo AI ecosystem: Neural Networks",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:nlp",
+    "name": "NLP",
+    "slug": "nlp",
+    "description": "Topic from Geo AI ecosystem: NLP",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:notebook",
+    "name": "Notebook",
+    "slug": "notebook",
+    "description": "Topic from Geo AI ecosystem: Notebook",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:objective-c",
+    "name": "Objective C",
+    "slug": "objective-c",
+    "description": "Topic from Geo AI ecosystem: Objective C",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:observability",
+    "name": "Observability",
+    "slug": "observability",
+    "description": "Topic from Geo AI ecosystem: Observability",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:ocr",
+    "name": "Ocr",
+    "slug": "ocr",
+    "description": "Topic from Geo AI ecosystem: Ocr",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:ocr-engine",
+    "name": "Ocr Engine",
+    "slug": "ocr-engine",
+    "description": "Topic from Geo AI ecosystem: Ocr Engine",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:optimizers",
+    "name": "Optimizers",
+    "slug": "optimizers",
+    "description": "Topic from Geo AI ecosystem: Optimizers",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:pandas",
+    "name": "Pandas",
+    "slug": "pandas",
+    "description": "Topic from Geo AI ecosystem: Pandas",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:pretrained-models",
+    "name": "Pretrained Models",
+    "slug": "pretrained-models",
+    "description": "Topic from Geo AI ecosystem: Pretrained Models",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:prometheus",
+    "name": "Prometheus",
+    "slug": "prometheus",
+    "description": "Topic from Geo AI ecosystem: Prometheus",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:pytorch-transformers",
+    "name": "Pytorch Transformers",
+    "slug": "pytorch-transformers",
+    "description": "Topic from Geo AI ecosystem: Pytorch Transformers",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:quant",
+    "name": "Quant",
+    "slug": "quant",
+    "description": "Topic from Geo AI ecosystem: Quant",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:quantitative-trading",
+    "name": "Quantitative Trading",
+    "slug": "quantitative-trading",
+    "description": "Topic from Geo AI ecosystem: Quantitative Trading",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:security",
+    "name": "Security",
+    "slug": "security",
+    "description": "Topic from Geo AI ecosystem: Security",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:source-code",
+    "name": "Source Code",
+    "slug": "source-code",
+    "description": "Topic from Geo AI ecosystem: Source Code",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:speech-recognition",
+    "name": "Speech Recognition",
+    "slug": "speech-recognition",
+    "description": "Topic from Geo AI ecosystem: Speech Recognition",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:stock",
+    "name": "Stock",
+    "slug": "stock",
+    "description": "Topic from Geo AI ecosystem: Stock",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:swift",
+    "name": "Swift",
+    "slug": "swift",
+    "description": "Topic from Geo AI ecosystem: Swift",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:systems",
+    "name": "Systems",
+    "slug": "systems",
+    "description": "Topic from Geo AI ecosystem: Systems",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:tensor",
+    "name": "Tensor",
+    "slug": "tensor",
+    "description": "Topic from Geo AI ecosystem: Tensor",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:tensorflow",
+    "name": "Tensorflow",
+    "slug": "tensorflow",
+    "description": "Topic from Geo AI ecosystem: Tensorflow",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:tesseract",
+    "name": "Tesseract",
+    "slug": "tesseract",
+    "description": "Topic from Geo AI ecosystem: Tesseract",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:tesseract-ocr",
+    "name": "Tesseract Ocr",
+    "slug": "tesseract-ocr",
+    "description": "Topic from Geo AI ecosystem: Tesseract Ocr",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:trade",
+    "name": "Trade",
+    "slug": "trade",
+    "description": "Topic from Geo AI ecosystem: Trade",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:transformers",
+    "name": "Transformers",
+    "slug": "transformers",
+    "description": "Topic from Geo AI ecosystem: Transformers",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  },
+  {
+    "id": "topic:web-development",
+    "name": "Web Development",
+    "slug": "web-development",
+    "description": "Topic from Geo AI ecosystem: Web Development",
+    "usage_count": 1,
+    "project_count": 1,
+    "people_count": 0
+  }
+]

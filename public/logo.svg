@@ -1,0 +1,28 @@
+<svg width="640" height="640" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-grad" x1="72" y1="24" x2="408" y2="332" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#58A5FF"/>
+      <stop offset="0.42" stop-color="#2E5BFF" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#0F1B3A" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(318 318) rotate(90) scale(230)">
+      <stop stop-color="#4FA2FF" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#4FA2FF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft-shadow" x="0" y="0" width="640" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#3F95FF" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <rect x="8" y="8" width="624" height="624" rx="18" fill="#0B0D12"/>
+  <path d="M8 8H632V268C596 196 517 98 409 46C302 -6 176 -2 72 54C46 68 26 87 8 109V8Z" fill="url(#bg-grad)" opacity="0.95"/>
+  <ellipse cx="165" cy="92" rx="150" ry="54" transform="rotate(-32 165 92)" fill="#79BBFF" opacity="0.45"/>
+  <rect x="8" y="8" width="624" height="624" rx="18" fill="url(#glow)" opacity="0.6"/>
+
+  <g filter="url(#soft-shadow)">
+    <circle cx="320" cy="292" r="158" fill="#11131A"/>
+    <circle cx="320" cy="292" r="158" stroke="white" stroke-width="42"/>
+    <path d="M269.5 384.5L311.8 319.7C315.7 313.7 324.5 313.7 328.4 319.7L370.5 384.5C374.8 391.1 370 399.6 362.2 399.6H277.8C270 399.6 265.2 391.1 269.5 384.5Z" fill="white"/>
+    <path d="M176.7 516.7L223.8 463.4C226.6 460.2 231 459.2 234.9 460.8C258.8 470.2 288.4 476.7 320 476.7C351.6 476.7 381.2 470.2 405.1 460.8C409 459.2 413.4 460.2 416.2 463.4L463.3 516.7C469.2 523.3 464.5 533.8 455.5 533.8H184.5C175.5 533.8 170.8 523.3 176.7 516.7Z" fill="white"/>
+  </g>
+</svg>

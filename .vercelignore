@@ -1,0 +1,10 @@
+node_modules
+.git
+.env
+.env.*
+dist
+exports
+docs
+geo_space_payload
+Paper.csv
+Person.csv
