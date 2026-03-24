@@ -14,6 +14,13 @@ import {
   ShieldCheck,
   Sparkles,
 } from 'lucide-react';
+import {
+  deployDataPath,
+  downloadTextWithFallback,
+  fetchJsonWithFallback,
+  isHostedReadonlyMode,
+  staticExportPath,
+} from '../utils/deployData';
 
 type SortMode = 'influence' | 'citations' | 'h_index' | 'name';
 type LinkHealthStatus = 'verified' | 'broken' | 'restricted' | 'unknown' | 'missing';
@@ -276,6 +283,7 @@ function mapCsvFallback(csvText: string): Researcher[] {
 }
 
 export default function ResearchersTab({ theme }: ResearchersTabProps) {
+  const hostedReadonlyMode = isHostedReadonlyMode();
   const [researchers, setResearchers] = useState<Researcher[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -294,26 +302,18 @@ export default function ResearchersTab({ theme }: ResearchersTabProps) {
 
   const loadQualityAndOptions = useCallback(async () => {
     try {
-      const [qualityRes, optionsRes] = await Promise.all([
-        fetch('/api/researchers/quality'),
-        fetch('/api/export/options'),
+      const [qualityPayload, optionsPayload] = await Promise.all([
+        fetchJsonWithFallback<QualityPayload>('/api/researchers/quality', deployDataPath('researchers-quality.json')),
+        fetchJsonWithFallback<ExportOptionsPayload>('/api/export/options', deployDataPath('export-options.json')),
       ]);
-
-      if (qualityRes.ok) {
-        const qualityPayload = (await qualityRes.json()) as QualityPayload;
-        setQuality(qualityPayload);
-      }
-
-      if (optionsRes.ok) {
-        const optionsPayload = (await optionsRes.json()) as ExportOptionsPayload;
-        setExportOptions(optionsPayload);
-        setExportTable((current) => {
-          if (!optionsPayload.tables.length) return current;
-          return optionsPayload.tables.some((table) => table.key === current)
-            ? current
-            : optionsPayload.tables[0].key;
-        });
-      }
+      setQuality(qualityPayload);
+      setExportOptions(optionsPayload);
+      setExportTable((current) => {
+        if (!optionsPayload.tables.length) return current;
+        return optionsPayload.tables.some((table) => table.key === current)
+          ? current
+          : optionsPayload.tables[0].key;
+      });
     } catch (optionsError) {
       console.warn('Unable to load quality/export options:', optionsError);
     }
@@ -322,9 +322,7 @@ export default function ResearchersTab({ theme }: ResearchersTabProps) {
   const loadResearchers = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/researchers');
-      if (!response.ok) throw new Error(`Researchers API failed (${response.status})`);
-      const payload = await response.json();
+      const payload = await fetchJsonWithFallback<Researcher[]>('/api/researchers', deployDataPath('researchers.json'));
       const cleaned = (payload as Researcher[])
         .filter((item) => item?.name)
         .sort((a, b) => b.influenceScore - a.influenceScore || b.citationCount - a.citationCount);
@@ -355,6 +353,11 @@ export default function ResearchersTab({ theme }: ResearchersTabProps) {
   }, [loadResearchers, loadQualityAndOptions]);
 
   const handleRefreshResearchers = async () => {
+    if (hostedReadonlyMode) {
+      setRefreshMessage('Hosted site runs in read-only mode. Use the local app for researcher refresh.');
+      return;
+    }
+
     setIsRefreshing(true);
     setRefreshMessage('');
     try {
@@ -390,23 +393,13 @@ export default function ResearchersTab({ theme }: ResearchersTabProps) {
     setIsExporting(true);
     setExportMessage('');
     try {
-      const response = await fetch(`/api/export?table=${encodeURIComponent(exportTable)}&format=${encodeURIComponent(exportFormat)}`);
-      if (!response.ok) throw new Error(`Export failed (${response.status})`);
-
-      const blob = await response.blob();
-      const contentDisposition = response.headers.get('content-disposition') || '';
-      const fileNameMatch = contentDisposition.match(/filename=\"?([^\";]+)\"?/i);
       const fallbackName = `${exportTable}.${exportFormat}`;
-      const filename = fileNameMatch?.[1] || fallbackName;
-
-      const objectUrl = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = objectUrl;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(objectUrl);
+      await downloadTextWithFallback(
+        `/api/export?table=${encodeURIComponent(exportTable)}&format=${encodeURIComponent(exportFormat)}`,
+        staticExportPath(exportTable, exportFormat),
+        fallbackName,
+        exportFormat === 'json' ? 'application/json;charset=utf-8' : 'text/plain;charset=utf-8',
+      );
       setExportMessage(`Exported ${exportTable} as ${exportFormat.toUpperCase()}.`);
     } catch (exportError) {
       console.error(exportError);
@@ -635,17 +628,17 @@ export default function ResearchersTab({ theme }: ResearchersTabProps) {
               ))}
             </select>
 
-            <button
-              onClick={handleRefreshResearchers}
-              disabled={isRefreshing}
-              className="h-11 px-4 rounded-2xl geo-secondary-btn text-[#7f3ee6] dark:text-[#e0aeff] text-sm font-black inline-flex items-center gap-2 disabled:opacity-60 transition-all"
-              title="Refresh and verify researcher links and metadata"
-            >
-              <RefreshCw size={14} className={isRefreshing ? 'animate-spin' : ''} />
-              {isRefreshing ? 'Refreshing...' : 'Refresh Researchers'}
-            </button>
+              <button
+                onClick={handleRefreshResearchers}
+                disabled={isRefreshing || hostedReadonlyMode}
+                className="h-11 px-4 rounded-2xl geo-secondary-btn text-[#7f3ee6] dark:text-[#e0aeff] text-sm font-black inline-flex items-center gap-2 disabled:opacity-60 transition-all"
+                title={hostedReadonlyMode ? 'Refresh is available in the local app.' : 'Refresh and verify researcher links and metadata'}
+              >
+                <RefreshCw size={14} className={isRefreshing ? 'animate-spin' : ''} />
+              {isRefreshing ? 'Refreshing...' : hostedReadonlyMode ? 'Local Refresh Only' : 'Refresh Researchers'}
+              </button>
+            </div>
           </div>
-        </div>
 
         <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs font-bold text-black/45 dark:text-zinc-400">
           <span>Last verification pass: {latestVerifiedLabel}</span>

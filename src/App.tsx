@@ -35,6 +35,7 @@ import { Project } from './types';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { formatProjectName } from './utils/projectDisplay';
+import { deployDataPath, fetchJsonWithFallback, fetchJsonWithFallbackTransform, isHostedReadonlyMode } from './utils/deployData';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -235,6 +236,7 @@ const hasIncompleteMeta = (project?: Partial<Project> | null) => {
 };
 
 export default function App() {
+  const hostedReadonlyMode = isHostedReadonlyMode();
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
@@ -332,8 +334,7 @@ export default function App() {
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch('/api/projects');
-      const data = await res.json();
+      const data = await fetchJsonWithFallback<Project[]>('/api/projects', deployDataPath('projects.json'));
       setProjects(data);
       localStorage.setItem('geo_projects_cache', JSON.stringify(data));
     } catch (err) {
@@ -344,6 +345,14 @@ export default function App() {
   };
 
   const handleSync = async ({ full = false, silent = false }: { full?: boolean; silent?: boolean } = {}) => {
+    if (hostedReadonlyMode) {
+      const message = 'Hosted site runs in read-only mode. Use local app for sync and refresh.';
+      if (!silent) {
+        pushToast('warning', 'Sync unavailable', message);
+      }
+      return { success: false, error: 'read-only-deployment', message };
+    }
+
     setIsSyncing(true);
     try {
       const endpoint = full ? '/api/sync-github?full=1' : '/api/sync-github';
@@ -397,6 +406,11 @@ export default function App() {
   };
 
   const handleSeed = async () => {
+    if (hostedReadonlyMode) {
+      pushToast('warning', 'Discovery unavailable', 'Hosted site runs in read-only mode. Use local app for discovery and refresh.');
+      return;
+    }
+
     setIsSeeding(true);
     try {
       // Fetch up to 1000 real projects via discovery
@@ -495,6 +509,7 @@ export default function App() {
   );
 
   useEffect(() => {
+    if (hostedReadonlyMode) return;
     if (loading || isSyncing || isSeeding || didTriggerAutoSync.current) return;
     if (!uniqueProjects.length) return;
 
@@ -507,7 +522,7 @@ export default function App() {
     didTriggerAutoSync.current = true;
     localStorage.setItem('geo_last_auto_sync_at', String(now));
     void handleSync({ silent: true });
-  }, [loading, isSyncing, isSeeding, uniqueProjects, missingMetaCount]);
+  }, [hostedReadonlyMode, loading, isSyncing, isSeeding, uniqueProjects, missingMetaCount]);
 
   const categoryFilters = useMemo(() => {
     const counts = uniqueProjects.reduce((acc: Record<string, number>, p) => {
@@ -727,7 +742,7 @@ export default function App() {
 
       if (key === 'r') {
         event.preventDefault();
-        if (!isSeeding && !isSyncing) {
+        if (!hostedReadonlyMode && !isSeeding && !isSyncing) {
           void handleSeed();
         }
         return;
@@ -747,7 +762,7 @@ export default function App() {
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [view, isSeeding, isSyncing, handleSeed]);
+  }, [hostedReadonlyMode, view, isSeeding, isSyncing, handleSeed]);
 
   const handleSurpriseMe = () => {
     if (!filteredProjects.length) {
@@ -807,13 +822,13 @@ export default function App() {
             </button>
             <button 
               onClick={handleSeed}
-              disabled={isSeeding || isSyncing}
+              disabled={hostedReadonlyMode || isSeeding || isSyncing}
               className="geo-primary-btn flex items-center gap-2 px-3 md:px-4 py-2 rounded-full text-sm font-medium transition-all disabled:opacity-50"
-              title="Discover repositories and run full metadata sync"
+              title={hostedReadonlyMode ? 'Hosted site is read-only' : 'Discover repositories and run full metadata sync'}
             >
               {isSeeding ? <RefreshCw size={14} className="animate-spin" /> : <RefreshCw size={14} />}
-              <span className="hidden sm:inline">Refresh Ecosystem</span>
-              <span className="sm:hidden">Refresh</span>
+              <span className="hidden sm:inline">{hostedReadonlyMode ? 'Local Refresh Only' : 'Refresh Ecosystem'}</span>
+              <span className="sm:hidden">{hostedReadonlyMode ? 'Local Only' : 'Refresh'}</span>
             </button>
           </div>
         </div>
@@ -1368,6 +1383,7 @@ function ProjectDetailModal({
   onToggleFavorite: (projectId: string) => void;
   onToast: (tone: ToastTone, title: string, description?: string) => void;
 }) {
+  const hostedReadonlyMode = isHostedReadonlyMode();
   const [project, setProject] = useState<Project | null>(null);
   const [activeProjectId, setActiveProjectId] = useState(initialProject.id);
   const [navigationTrail, setNavigationTrail] = useState<string[]>([initialProject.id]);
@@ -1391,8 +1407,17 @@ function ProjectDetailModal({
     setProject(null);
     setLoading(true);
     try {
-      const res = await fetch(`/api/projects/${projectId}`, { signal });
-      const data = await res.json();
+      const data = await fetchJsonWithFallbackTransform<Project, Project[]>(
+        `/api/projects/${projectId}`,
+        deployDataPath('projects.json'),
+        (projects) => {
+          const match = projects.find((entry) => entry.id === projectId);
+          if (!match) {
+            throw new Error(`Project ${projectId} was not found in deploy snapshot.`);
+          }
+          return match;
+        },
+      );
       if (signal?.aborted || !isMountedRef.current) return;
       setProject(data);
     } catch (err) {
@@ -1439,6 +1464,12 @@ function ProjectDetailModal({
 
   const syncProjectMetadata = async (silent = false) => {
     if (!project) return false;
+    if (hostedReadonlyMode) {
+      if (!silent && isMountedRef.current) {
+        onToast('warning', 'Sync unavailable', 'Hosted site runs in read-only mode. Use the local app to refresh project metadata.');
+      }
+      return false;
+    }
     setIsSyncing(true);
     if (silent && isMountedRef.current) setIsAutoEnriching(true);
     syncControllerRef.current?.abort();
@@ -1483,12 +1514,12 @@ function ProjectDetailModal({
   };
 
   useEffect(() => {
-    if (!project || loading || isSyncing) return;
+    if (hostedReadonlyMode || !project || loading || isSyncing) return;
     if (!hasIncompleteMeta(project)) return;
     if (autoEnrichedIds.current.has(project.id)) return;
     autoEnrichedIds.current.add(project.id);
     syncProjectMetadata(true);
-  }, [project, loading, isSyncing]);
+  }, [hostedReadonlyMode, project, loading, isSyncing]);
 
   const handleCopyRepo = async () => {
     const repoUrl = toSafeExternalUrl(project?.github_url);
@@ -1723,9 +1754,9 @@ function ProjectDetailModal({
                       <div className="text-lg font-bold">{formatStars(project.stars)}</div>
                       <button 
                         onClick={handleManualSync}
-                        disabled={isSyncing}
+                        disabled={isSyncing || hostedReadonlyMode}
                         className="absolute -top-2 -right-2 w-6 h-6 bg-[#9c46fd] text-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover/stars:opacity-100 disabled:opacity-50 transition-all hover:scale-110"
-                        title="Refresh from GitHub"
+                        title={hostedReadonlyMode ? 'Refresh is available in the local app.' : 'Refresh from GitHub'}
                       >
                           <RefreshCw size={10} className={cn(isSyncing && "animate-spin")} />
                         </button>

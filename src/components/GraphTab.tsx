@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { GraphData, Project } from '../types';
 import { formatProjectName } from '../utils/projectDisplay';
+import { deployDataPath, fetchJsonWithFallback } from '../utils/deployData';
 
 type GraphNode = GraphData['nodes'][number];
 type NormalizedLink = { source: string; target: string };
@@ -136,11 +137,10 @@ export default function GraphTab({ theme, onNodeClick }: GraphTabProps) {
     const loadData = async () => {
       setLoading(true);
       try {
-        const [graphRes, projectsRes] = await Promise.all([fetch('/api/graph'), fetch('/api/projects')]);
-        if (!graphRes.ok) throw new Error(`Graph API error (${graphRes.status})`);
-        if (!projectsRes.ok) throw new Error(`Projects API error (${projectsRes.status})`);
-
-        const [graphPayload, projectsPayload] = await Promise.all([graphRes.json(), projectsRes.json()]);
+        const [graphPayload, projectsPayload] = await Promise.all([
+          fetchJsonWithFallback<GraphData>('/api/graph', deployDataPath('graph.json')),
+          fetchJsonWithFallback<Project[]>('/api/projects', deployDataPath('projects.json')),
+        ]);
         if (cancelled) return;
         setGraphData(graphPayload);
         setProjects(projectsPayload);

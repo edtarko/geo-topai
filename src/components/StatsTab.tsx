@@ -44,6 +44,13 @@ import {
 } from 'lucide-react';
 import { Project } from '../types';
 import { formatProjectName } from '../utils/projectDisplay';
+import {
+  deployDataPath,
+  downloadTextWithFallback,
+  fetchJsonWithFallback,
+  isHostedReadonlyMode,
+  staticExportPath,
+} from '../utils/deployData';
 
 const COLORS = ['#9c46fd', '#cb5ef2', '#fd77e7', '#7b5bf4', '#d98af8', '#6f8cff', '#f2a6ea', '#8c6bff'];
 const UI_LOCALE = 'en-US';
@@ -235,27 +242,6 @@ function buildMonthlyActivitySeries(projects: Project[], monthCount = 12) {
   return months;
 }
 
-async function downloadFromApi(url: string, fallbackFileName: string) {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Download failed (${response.status})`);
-  }
-
-  const blob = await response.blob();
-  const contentDisposition = response.headers.get('content-disposition') || '';
-  const fileNameMatch = contentDisposition.match(/filename=\"?([^\";]+)\"?/i);
-  const filename = fileNameMatch?.[1] || fallbackFileName;
-
-  const objectUrl = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = objectUrl;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(objectUrl);
-}
-
 function escapeCsvCell(value: string) {
   if (value.includes('"')) return `"${value.replace(/"/g, '""')}"`;
   if (value.includes(',') || value.includes('\n')) return `"${value}"`;
@@ -287,6 +273,7 @@ export default function StatsTab({
   onDataRefresh,
   onToast,
 }: StatsTabProps) {
+  const hostedReadonlyMode = isHostedReadonlyMode();
   const isDark = theme === 'dark';
   const [windowDays, setWindowDays] = useState<number>(180);
   const [categoryFilter, setCategoryFilter] = useState('All');
@@ -375,9 +362,10 @@ export default function StatsTab({
   const loadStatus = useCallback(async () => {
     setStatusLoading(true);
     try {
-      const response = await fetch('/api/insights/status?sample=4');
-      if (!response.ok) throw new Error(`Insights status failed (${response.status})`);
-      const payload = (await response.json()) as InsightsStatus;
+      const payload = await fetchJsonWithFallback<InsightsStatus>(
+        '/api/insights/status?sample=4',
+        deployDataPath('insights-status.json'),
+      );
       setStatus(payload);
       setStatusError(null);
     } catch (error) {
@@ -637,6 +625,11 @@ export default function StatsTab({
   }, [status]);
 
   const handleRefreshInsights = async () => {
+    if (hostedReadonlyMode) {
+      setRefreshMessage('Hosted site runs in read-only mode. Use the local app for refresh and sync.');
+      return;
+    }
+
     setIsRefreshing(true);
     setRefreshMessage('');
     try {
@@ -688,7 +681,12 @@ export default function StatsTab({
     const exportKey = `${table}:${format}`;
     setIsExporting(exportKey);
     try {
-      await downloadFromApi(`/api/export?table=${encodeURIComponent(table)}&format=${format}`, `${table}.${format}`);
+      await downloadTextWithFallback(
+        `/api/export?table=${encodeURIComponent(table)}&format=${format}`,
+        staticExportPath(table, format),
+        `${table}.${format}`,
+        format === 'json' ? 'application/json;charset=utf-8' : 'text/plain;charset=utf-8',
+      );
       setRefreshMessage(`${label} exported as ${format.toUpperCase()}.`);
     } catch (error) {
       console.error(error);
@@ -699,6 +697,11 @@ export default function StatsTab({
   };
 
   const handleGeoPayloadExport = async () => {
+    if (hostedReadonlyMode) {
+      setRefreshMessage('GEO payload export is available in the local app only.');
+      return;
+    }
+
     setIsGeoExporting(true);
     try {
       const response = await fetch('/api/geo-space/export', {
@@ -1171,11 +1174,11 @@ export default function StatsTab({
           <div className="flex flex-wrap gap-2">
             <button
               onClick={handleRefreshInsights}
-              disabled={isRefreshing}
+              disabled={isRefreshing || hostedReadonlyMode}
               className="h-10 px-4 rounded-2xl geo-primary-btn text-sm font-black inline-flex items-center gap-2 disabled:opacity-60 transition-all"
             >
               <RefreshCw size={14} className={isRefreshing ? 'animate-spin' : ''} />
-              {isRefreshing ? 'Refreshing...' : 'Refresh Insights'}
+              {isRefreshing ? 'Refreshing...' : hostedReadonlyMode ? 'Local Refresh Only' : 'Refresh Insights'}
             </button>
             <button
               onClick={() => handleExport({
@@ -1241,7 +1244,7 @@ export default function StatsTab({
             </button>
             <button
               onClick={handleGeoPayloadExport}
-              disabled={isGeoExporting}
+              disabled={isGeoExporting || hostedReadonlyMode}
               className="h-9 px-3 rounded-xl geo-secondary-btn text-[#b053f4] dark:text-[#f0bdff] text-xs font-black inline-flex items-center gap-2 disabled:opacity-60 transition-all"
             >
               <Database size={13} />
